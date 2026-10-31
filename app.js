@@ -2,7 +2,7 @@ import * as T from './three.module.js';
 import {CompatibilityRenderer} from './compat.js';
 const $=s=>document.querySelector(s), scene=new T.Scene();
 let renderer;try{renderer=new T.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});}catch(e){renderer=new CompatibilityRenderer();document.body.classList.add('compatibility');}
-renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;$('#scene').appendChild(renderer.domElement);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2.5));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;renderer.outputColorSpace=T.SRGBColorSpace;renderer.useLegacyLights=false;$('#scene').appendChild(renderer.domElement);
 scene.background=new T.Color('#a2a18c');scene.fog=new T.FogExp2('#aaa58b',.0018);
 const camera=new T.PerspectiveCamera(42,innerWidth/innerHeight,.1,1800);
 scene.add(new T.HemisphereLight('#c8d9d3','#777151',2.0));
