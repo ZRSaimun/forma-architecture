@@ -1,4 +1,6 @@
 # FORMA
+
+[Open the live website](https://zrsaimun.github.io/forma-architecture/)
 An original architectural presentation inspired by a construction-to-interior reel. This is not an exact reproduction of its imagery, source code or motion.
 
 ## Views
