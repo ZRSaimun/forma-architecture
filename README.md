@@ -18,3 +18,6 @@ Source: [wearebrand reel](https://www.facebook.com/reel/1769516980890876), suppl
 
 ## Run
 Serve this repository as a static site; no build step or API keys required.
+
+## Display clarity
+The canvas uses actual screen pixel density up to a 3840×2160-equivalent pixel budget, high-quality resampling and mild bounded source sharpening with a four-frame cache. Source frames remain 480×270. This is display enhancement, not recovered 4K detail or a claim of genuine 4K source quality. Original high-resolution renders/video are required for that.
