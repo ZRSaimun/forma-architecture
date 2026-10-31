@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0",
+  "project": "The Aurea Residence",
+  "disclaimer": "AI-assisted reconstructions are illustrative and must not be treated as verified architectural documentation.",
+  "scenes": [
+    {
+      "id": "scene-01",
+      "source": "replace-with-original-source-file",
+      "category": "luxury-interior",
+      "delivery": {
+        "master": "3840x2160",
+        "optionalMaster": "7680x4320",
+        "web": ["webp", "avif"]
+      },
+      "sceneInventory": {
+        "camera": "record after analysis",
+        "lighting": "cinematic golden-hour sunset; preserve source direction",
+        "materials": ["marble", "leather", "glass", "wood", "fabric", "metal"],
+        "majorObjects": [],
+        "ambiguousRegions": []
+      },
+      "candidates": [],
+      "selectedCandidate": null,
+      "changeReport": [],
+      "qa": {
+        "perspectiveChecked": false,
+        "structureChecked": false,
+        "objectPlacementChecked": false,
+        "reflectionsChecked": false,
+        "textOrBlueprintChecked": false,
+        "humanReviewRequired": true
+      }
+    }
+  ]
+}
