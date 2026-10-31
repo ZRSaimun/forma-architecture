@@ -1,13 +1,16 @@
 # FORMA
-
-[Open the live website](https://zrsaimun.github.io/forma-architecture/)
 An original architectural presentation inspired by a construction-to-interior reel. This is not an exact reproduction of its imagery, source code or motion.
 
-## Views
-- Cinematic: four original generated architectural stills, with scroll-linked blended transitions and coordinated chapters. It is not a rendered video or a full frame-by-frame construction simulation.
-- Explore 3D: real procedural Three.js geometry, staged structure/facade and a continuous camera path into a furnished interior. A Canvas 2D projected-geometry compatibility renderer is used if WebGL is unavailable.
+## Continuous construction journey
 
-Chapter buttons, range slider, playback, restart, motion preference and concept dialog work without a backend. On phones the composition crops to fit; controls remain touch/keyboard accessible. No real property claims or enquiry collection.
+Scroll controls the complete scene in both directions:
+1. Blueprint grid and reinforcement.
+2. Eight floors, each with separately staged slab, columns and beams.
+3. Progressive installation of glass and bronze framing.
+4. Finishing bands, warm lighting and the upper residence.
+5. Continuous camera travel into the furnished interior.
+
+The four-image crossfade is no longer used. Every visible construction state is computed from scroll progress; reverse scrolling dismantles the structure consistently. Chapter navigation, slider, play/pause, restart and reduced-motion mode remain available. A projected Canvas compatibility renderer is used if WebGL is unavailable. The procedural model remains an approximation, not a claim of the reference reel's photorealistic quality or exact geometry.
 
 ## Assets
 `architectural-story.png` created using the built-in image generation tool. Prompt: original photorealistic four-panel architectural storyboard, construction frame, completed bronze/glass midrise, penthouse approach, furnished interior; coherent golden sunset, concrete/wood/travertine, no text or UI. No media copied from the Facebook reel.
@@ -15,4 +18,4 @@ Chapter buttons, range slider, playback, restart, motion preference and concept 
 Three.js 0.187.0, MIT licence in LICENSE. Fonts from Google Fonts, system fallbacks included. Buildless site; serve the repository root.
 
 ## Validation
-JavaScript syntax checks passed. Browser verified cinematic view and controls. Cloud browser lacks WebGL; the projected-geometry compatibility view was tested. Full GPU rendering and physical phone performance remain unverified.
+JavaScript syntax checks passed. Browser verified progressive geometry, reversal and chapter controls. Cloud browser lacks WebGL; the projected-geometry compatibility view was tested. Full GPU rendering and physical phone performance remain unverified.
