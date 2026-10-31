@@ -13,6 +13,14 @@ Source: [wearebrand reel](https://www.facebook.com/reel/1769516980890876), suppl
 ## Separate 3D study
 `study.html` preserves the original procedural Three.js construction study with independent geometry, PBR materials and a software fallback. It is an original approximation, not the reel's implementation. Three.js 0.187.0 is distributed under the MIT licence in LICENSE.
 
+## Enhancement pipeline
+This repository now includes a source-preserving production specification and traceability template:
+
+- [Architectural image enhancement workflow](docs/architectural-image-enhancement.md)
+- [Enhancement manifest example](enhancement-manifest.example.json)
+
+The workflow separates verified source material from AI-assisted illustrative reconstruction, keeps website typography/navigation in HTML/CSS, supports candidate comparison and selective inpainting, and requires QA before approved exports are published. Model credentials must remain server-side; GitHub Pages should only serve approved exports.
+
 ## Other assets
 `architectural-story.png` is the earlier original generated four-panel storyboard; it is retained for provenance and is not used in the main reconstruction. Fonts use Google Fonts with local system fallbacks.
 
