@@ -7,3 +7,55 @@
 
 /* Reference reconstruction: keep the original scene itself unobstructed. */
 body:has(script[src="sequence.js"]) .intro,body:has(script[src="sequence.js"]) .vignette,body:has(script[src="sequence.js"]) .grain,body:has(script[src="sequence.js"]) #build-status,body:has(script[src="sequence.js"]) #hint,body:has(script[src="sequence.js"]) .project,body:has(script[src="sequence.js"]) .chapter-side{display:none}body:has(script[src="sequence.js"]) header{padding:22px 3%;background:linear-gradient(#0008,transparent);opacity:.5;transition:opacity .2s}body:has(script[src="sequence.js"]) header:hover,body:has(script[src="sequence.js"]) header:focus-within{opacity:1}body:has(script[src="sequence.js"]) .brand{font-size:13px;letter-spacing:2px}body:has(script[src="sequence.js"]) .brand svg,body:has(script[src="sequence.js"]) .brand span{display:none}body:has(script[src="sequence.js"]) footer{left:3%;right:3%;bottom:0;padding:16px 0;border:0;background:linear-gradient(transparent,#0008);opacity:.55;transition:opacity .2s}body:has(script[src="sequence.js"]) footer:hover,body:has(script[src="sequence.js"]) footer:focus-within{opacity:1}body:has(script[src="sequence.js"]) .chapters button{color:#fff;text-shadow:0 1px 5px #000}body:has(script[src="sequence.js"]) .trackmeta{color:#fff}.study-link{color:#e2b17c}#fit{font-size:10px}@media(max-width:700px){body:has(script[src="sequence.js"]) header{opacity:.85;padding:18px 5%}body:has(script[src="sequence.js"]) footer{opacity:.9;left:5%;right:5%}body:has(script[src="sequence.js"]) .brand{font-size:9px}nav .study-link{display:none}#fit{font-size:8px}}
+
+/* Mobile composition follows the architectural reference: quiet controls,
+   a low editorial headline, and the chapter timeline anchored to the bottom. */
+@media(max-width:700px){
+  body{min-height:100svh;overflow-x:hidden;background:#171916}
+  #scene,.vignette,.grain{position:fixed;inset:0}
+  #scene canvas{width:100%;height:100%;object-fit:cover}
+  .vignette{background:linear-gradient(180deg,rgba(20,22,18,.38),transparent 22%,transparent 51%,rgba(15,24,19,.54) 75%,rgba(11,22,17,.9)),linear-gradient(90deg,rgba(24,28,21,.2),transparent 68%)}
+  header{top:0;left:0;right:0;padding:28px 6% 18px;align-items:flex-start;background:linear-gradient(#10141144,transparent)}
+  .brand{font-size:17px;letter-spacing:4px;gap:9px;align-items:center}
+  .brand svg{width:30px;height:34px;flex:none}
+  .brand span{display:none}
+  nav{gap:clamp(10px,4vw,24px);font-size:10px;align-items:center}
+  nav #about{max-width:58px;line-height:1.45}
+  nav .study-link,nav #motion{display:none}
+  nav #fit{font-size:9px;max-width:54px;line-height:1.4}
+  nav .round{width:38px;height:38px;font-size:18px;flex:none}
+  main{inset:0}
+  #build-status{top:18.5%;left:7%;max-width:75%;font-size:7px;letter-spacing:2px;padding:8px 12px;border-left:2px solid #e5bd84;color:#f2d8ad}
+  .intro,.interior .intro{left:7%;bottom:clamp(215px,29vh,285px);top:auto;max-width:min(76%,340px)}
+  .intro .eyebrow{font-size:7px;letter-spacing:1.8px;gap:9px;color:#f1eadb}
+  .intro .dot{width:6px;height:6px}
+  .intro h1,.interior .intro h1{font-size:clamp(42px,10vw,62px);line-height:.96;letter-spacing:-1.4px;margin:20px 0 0}
+  .intro #description{display:none}
+  .chapter-side{display:none}
+  #hint{left:auto;right:8%;bottom:clamp(190px,25vh,245px);font-size:7px;letter-spacing:1.8px;gap:18px;color:#f6eddb}
+  #hint span{font-size:24px}
+  footer{left:7%;right:7%;bottom:0;display:block;padding:20px 0 max(23px,env(safe-area-inset-bottom));gap:0;border-top:1px solid #eee7d855;background:linear-gradient(180deg,transparent,rgba(13,24,18,.12))}
+  .project{display:none}
+  .journey{width:100%}
+  .chapters{gap:8px;align-items:flex-start}
+  .chapters button{flex:1;min-width:0;text-align:left;padding:12px 0 10px;font-size:clamp(9px,2.6vw,11px);line-height:1.35;white-space:nowrap;color:#c4c6b9;text-shadow:0 1px 6px #10140f}
+  .chapters b{display:block;margin:0 0 7px;font-size:8px;color:#aaa99c}
+  .chapters button.active,.chapters button.active b{color:#f1c68f}
+  input[type=range]{margin:13px 0 16px;height:1px;background:#ffffff55}
+  input[type=range]::-webkit-slider-thumb{width:11px;height:11px}
+  input[type=range]::-moz-range-thumb{width:11px;height:11px}
+  .trackmeta{font-size:7px;letter-spacing:1.6px;color:#d4d2c7}
+  #percent{margin-left:16px}
+  .replay{position:absolute;right:0;top:calc(100% - 82px);width:39px;height:39px;font-size:21px;background:#17201955;border-color:#ffffff55}
+  body:has(dialog[open]) footer{filter:blur(2px)}
+}
+@media(max-height:700px) and (max-width:700px){
+  .intro,.interior .intro{bottom:205px}
+  .intro h1,.interior .intro h1{font-size:clamp(38px,8.5vw,52px)}
+  #hint{bottom:178px}
+  footer{padding-top:12px}
+}
+@media(max-width:700px){
+  .journey{width:calc(100% - 52px)}
+  .replay{top:76px}
+}
