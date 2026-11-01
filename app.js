@@ -82,7 +82,7 @@ function update(p){
  let plan=1-smooth(.10,.25,p);blueprint.visible=plan>.001;blueMat.opacity=plan;blueprint.scale.setScalar(.45+.55*smooth(0,.075,p));
  reinforcement.visible=p<.23;reinforcement.scale.y=Math.max(.001,smooth(.015,.10,p));
  crane.visible=p>.02&&p<.79;crane.position.y=smooth(.72,.79,p)*32;
- furnish.visible=p>.69;furnish.scale.y=Math.max(.001,smooth(.69,.78,p));
+ // Keep the final room intentionally empty: the reveal is about architecture, light and space.\nfurnish.visible=false;furnish.scale.y=1;
  // A single camera follows the building from the plan to the completed upper residence.
  const mobile=innerWidth<700,orbit=smooth(.05,.57,p),travel=smooth(.80,1,p);
  const exterior=new T.Vector3((mobile?56:47)+Math.sin(orbit*.65)*9,26+orbit*15,mobile?85:68);
