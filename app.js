@@ -63,6 +63,18 @@ plant(-10,-7);plant(10,6);
 const crane=new T.Group();scene.add(crane);for(let y=0;y<48;y+=3){box(.22,3,.22,17,y,0,mats.gold,crane);box(.22,3,.22,18,y,0,mats.gold,crane);let brace=box(.1,3.2,.1,17.5,y,0,mats.gold,crane);brace.rotation.z=.32;}box(38,.35,.4,6,47,0,mats.gold,crane);for(let x=-12;x<24;x+=2){box(.08,1.7,.08,x,47.7,0,mats.gold,crane);let br=box(.08,2.5,.08,x+1,47.7,0,mats.gold,crane);br.rotation.z=.9;}box(.05,17,.05,-10,38,0,mats.dark,crane);box(3,2,2,22,46,0,mats.concrete,crane);
 // Distant skyline has varied profiles, windows and atmospheric depth.
 const cityMat=new T.MeshStandardMaterial({color:'#737c73',roughness:.8});for(let i=0;i<90;i++){let x=(rand()-.5)*700,z=-170-rand()*550;if(Math.abs(x)<25&&z>-90)continue;let h=5+Math.pow(rand(),2)*58,w=7+rand()*17,d=8+rand()*18;box(w,h,d,x,h/2-2,z,cityMat);if(i%3===0)box(w*.65,h*.08,d*.65,x,h+h*.04-2,z,cityMat);for(let k=0;k<Math.min(h/5,12);k++)if(rand()>.45)box(w*.65,.4,.05,x,k*5+3,z+d/2+.05,mats.light);}
+// Separate architectural shell remains visible when the furniture group is hidden.
+const residence=new T.Group();scene.add(residence);residence.position.y=32;
+box(26,.24,20,0,0,0,mats.stone,residence);
+box(26,.24,20,0,4.3,0,mats.stone,residence);
+box(.24,4.2,20,-12.8,2.1,0,mats.wood,residence);
+box(.24,4.2,20,12.8,2.1,0,mats.wood,residence);
+for(const x of [-10,10])box(.05,.04,18,x,4.12,0,mats.light,residence);
+const roomLight=new T.PointLight('#ffd4a1',32,24,2);roomLight.position.set(0,35,-2);scene.add(roomLight);
+const cameraRoute=new T.CatmullRomCurve3([
+new T.Vector3(37,19,54),new T.Vector3(43,28,61),new T.Vector3(35,39,48),
+new T.Vector3(22,38,32),new T.Vector3(8,35.2,19),new T.Vector3(.5,34.1,7.7)
+],false,'centripetal');
 const sections=[{name:'THE STRUCTURE',h:'Every space<br>begins with<br><em>a vision.</em>',d:'From the first line to the last light.<br>Explore the making of a place to belong.'},{name:'THE ENVELOPE',h:'A frame.<br>A rhythm.<br><em>A new form.</em>',d:'Concrete finds its rhythm.<br>Glass catches the last of the sun.'},{name:'THE ARRIVAL',h:'Beyond<br>the facade.<br><em>Into the light.</em>',d:'Follow the architecture inward.<br>A different perspective is waiting.'},{name:'THE LIVING',h:'Not just built.<br><em>Belonged to.</em>',d:'Warm materials. Quiet proportions.<br>A space that finally feels like home.'}];
 let progress=scrollY/(document.documentElement.scrollHeight-innerHeight),target=scrollY/(document.documentElement.scrollHeight-innerHeight),playing=false,last=performance.now(),chapter=-1,motion=!matchMedia('(prefers-reduced-motion: reduce)').matches;
 const smooth=(a,b,v)=>{let t=T.MathUtils.clamp((v-a)/(b-a),0,1);return t*t*(3-2*t);};
@@ -82,12 +94,14 @@ function update(p){
  let plan=1-smooth(.10,.25,p);blueprint.visible=plan>.001;blueMat.opacity=plan;blueprint.scale.setScalar(.45+.55*smooth(0,.075,p));
  reinforcement.visible=p<.23;reinforcement.scale.y=Math.max(.001,smooth(.015,.10,p));
  crane.visible=p>.02&&p<.79;crane.position.y=smooth(.72,.79,p)*32;
- // Keep the final room intentionally empty: the reveal is about architecture, light and space.\nfurnish.visible=false;furnish.scale.y=1;
+ furnish.visible=false;residence.visible=p>.66;residence.scale.y=Math.max(.001,smooth(.66,.76,p));roomLight.intensity=32*smooth(.7,.82,p);
  // A single camera follows the building from the plan to the completed upper residence.
- const mobile=innerWidth<700,orbit=smooth(.05,.57,p),travel=smooth(.80,1,p);
- const exterior=new T.Vector3((mobile?56:47)+Math.sin(orbit*.65)*9,26+orbit*15,mobile?85:68);
- const inside=new T.Vector3(.5,34.1,7.7),focusA=new T.Vector3(-3,10+orbit*10,0),focusB=new T.Vector3(-1,33.8,-7);
- camera.position.lerpVectors(exterior,inside,travel);camera.lookAt(focusA.lerp(focusB,travel));camera.fov=mobile?48:42;camera.updateProjectionMatrix();
+ const mobile=innerWidth<700;
+ const pathProgress=p<.49?smooth(0,.49,p)*.25:p<.78?.25+smooth(.49,.78,p)*.3:.55+smooth(.78,1,p)*.45;
+ camera.position.copy(cameraRoute.getPointAt(pathProgress));
+ if(mobile&&p<.85){camera.position.x*=1.18;camera.position.z*=1.2;}
+ const focus=new T.Vector3(-1,T.MathUtils.lerp(9,33.8,smooth(.06,.88,p)),T.MathUtils.lerp(0,-7,smooth(.8,1,p)));
+ camera.lookAt(focus);camera.fov=T.MathUtils.lerp(mobile?50:42,55,smooth(.8,1,p));camera.updateProjectionMatrix();
  let c=p<.49?0:p<.72?1:p<.91?2:3;
  if(c!==chapter){chapter=c;$('#heading').innerHTML=sections[c].h;$('#description').innerHTML=sections[c].d;$('#sideName').textContent=sections[c].name;$('#count').textContent=`0${c+1} / 04`;document.body.classList.toggle('interior',c===3);document.querySelectorAll('[data-stage]').forEach((b,i)=>{b.classList.toggle('active',i===c);b.setAttribute('aria-current',i===c?'step':'false');});}
  $('#build-status').textContent=p<.09?'01 — DRAWING THE PLAN':p<.49?`02 — STRUCTURE / ${completed} OF 8 FLOORS`:p<.72?'03 — INSTALLING GLASS + BRONZE':p<.80?'04 — LIGHT + FINISHES':p<.96?'05 — ENTERING THE RESIDENCE':'06 — WELCOME HOME';
